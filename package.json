@@ -1,0 +1,11 @@
+{
+  "name": "landing-page",
+  "version": "1.0.0",
+  "description": "build a multi-section landing page to facilitate dynamically adding content to the page",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "joyce yu",
+  "license": "ISC"
+}
