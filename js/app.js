@@ -43,12 +43,18 @@ function scrollFunction() {
     const activeSection = document.getElementsByClassName('active-section')[0];
     for (let i = 0; i < sections.length; i++){
         const currentSection = sections[i];
-        if (currentSection.offsetTop > window.pageYOffset && currentSection.offsetTop < window.pageYOffset + 50){
+        if (currentSection.offsetTop > window.pageYOffset - 40 && currentSection.offsetTop < window.pageYOffset + 200){
             if (activeSection === currentSection){
                 return;
             }
             activeSection.classList.remove('active-section');
             currentSection.classList.add('active-section');
+
+            const menuItems = document.querySelectorAll("#navbar__list li");
+            const currentItem = menuItems[i];
+
+            document.getElementsByClassName('active-menu')[0].classList.remove('active-menu');
+            currentItem.classList.add("active-menu");
         }
         // console.log(`section ${i+1}`);
         // console.log(currentSection.offsetTop);
@@ -66,6 +72,11 @@ function scrollFunction() {
 
 for (let i = 0; i < sections.length; i++){
     let currentSection = sections[i];
+    if (i == 0) {
+        document.getElementById("navbar__list").innerHTML += `<li class="active-menu" data-sectionid="section${i+1}">${currentSection.dataset.nav}</li>`;
+        continue;
+    }
+
     document.getElementById("navbar__list").innerHTML += `<li data-sectionid="section${i+1}">${currentSection.dataset.nav}</li>`;
 }
 
@@ -74,14 +85,13 @@ for (let i = 0; i < sections.length; i++){
 document.getElementById('navbar__list').addEventListener('click', performAction);
 function performAction(e){
     const currentSection = e.target;
+
     // currentSection.classList.remove("your-active-class");// Remove old active section
     const sectionElement = document.getElementById(currentSection.dataset.sectionid);
-    sectionElement.scrollIntoView(); 
+    sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }); 
     // Set newly selected section as active'
     document.getElementsByClassName('active-section')[0].classList.remove('active-section');
     sectionElement.classList.add('active-section');
-    
-
 }
 
 
